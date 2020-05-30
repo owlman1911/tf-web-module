@@ -2,7 +2,7 @@ resource "aws_lb" "web-lb" {
     name                = "${var.cluster_name}-lb-web"
     load_balancer_type  = "application"
     subnets             = data.aws_subnet_ids.df-sub.ids
-    security_groups     = [aws_security_group.sg-weblb.id]
+    security_groups     = [aws_security_group.sg-alb.id]
 }
 
 resource "aws_lb_listener" "http" { 
