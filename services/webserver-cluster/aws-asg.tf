@@ -33,6 +33,16 @@ resource "aws_autoscaling_group" "asg-web" {
     min_size = var.min_size
     max_size = var.max_size
 
+    dynamic "tag" {
+        for_each = var.custom_tags
+
+        content {
+                key                     = tag.value
+                value                   = tag.value
+                propagate_at_launch     = true
+        }
+    }
+
     tag {
         key     = "Name"
         value   = "${var.cluster_name}-asg-web"

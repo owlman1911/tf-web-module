@@ -42,3 +42,4 @@ variable "max_size" {
     description         = "The maximum number of instances in the web cluster"
     type                = number
 }
+
