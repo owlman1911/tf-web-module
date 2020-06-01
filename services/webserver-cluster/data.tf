@@ -16,7 +16,7 @@ data "terraform_remote_state" "db" {
     }
 }
 
-data "template_file" "user-data" {
+data "template_file" "user_data" {
     count = var.enable_new_user_data ? 0 : 1
 
     template        = file("${path.module}/user-data.sh")
@@ -28,10 +28,10 @@ data "template_file" "user-data" {
     }
 }
 
-data "template_file" "user-new-data" {
+data "template_file" "user_data_new" {
     count = var.enable_new_user_data ? 1 : 0
 
-    template        = file("${path.module}/user-new-data.sh")
+    template        = file("${path.module}/user-data-new.sh")
     vars            = {
         server_port = var.web-srv-prt
         db_address  = data.terraform_remote_state.db.outputs.address
