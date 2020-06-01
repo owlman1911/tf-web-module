@@ -48,3 +48,27 @@ variable "custom_tags" {
     type            = map(string)
     default         = {}
 }
+
+#used to determine if enabling schedule task should be turned on for staging/prod
+variable "enable_autoscaling" {
+    description     = "if set to true, enable auto scaling"
+    type            = bool
+}
+
+#used to determine if using 
+variable "enable_new_user_data" {
+    description     = "if this is true, use the new user data script"
+    type            = bool
+}
+
+variable "ami" {
+    description     = "The AMI to run in the web cluster"
+    type            = string
+    default         = "ami-01d025118d8e760db"
+}
+
+variable "server_text" {
+    description     = "The text the server should respond"
+    type            = string
+    default         = "this shit works"
+}
