@@ -44,7 +44,7 @@ resource "aws_autoscaling_group" "asg-web" {
     min_size = var.min_size
     max_size = var.max_size
 
-    min_elb_capcity    = var.min_size
+    min_elb_capacity    = var.min_size
 
     lifecycle {
         create_before_destroy   = true
