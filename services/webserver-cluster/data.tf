@@ -28,7 +28,7 @@ data "template_file" "user-data" {
     }
 }
 
-data "template_file" "user-new-data.sh" {
+data "template_file" "user-new-data" {
     count = var.enable_new_user_data ? 1 : 0
 
     template        = file("${path.module}/user-new-data.sh")
