@@ -19,6 +19,7 @@ resource "aws_launch_configuration" "lconf_web" {
     image_id    =   var.ami
     instance_type =  var.instance_type
     security_groups = [aws_security_group.sg-web.id]
+    
     #Using render file instead
     user_data = (length(data.template_file.user_data[*]) > 0 ?
                 data.template_file.user_data[0].rendered
@@ -80,16 +81,17 @@ resource "aws_autoscaling_schedule" "scale_outof_bus" {
     desired_capacity   = 4
     recurrence          = "0 9 * * *" 
 
-    autoscaling_group_name = module.webserver_cluster.asg_name
+    autoscaling_group_name = aws_autoscaling_group.asg_name.name
 }
 
 resource "aws_autoscaling_schedule" "scale_in_night" {
     count   = var.enable_autoscaling ? 1 : 0
+
     scheduled_action_name           = "scale-in-at-ngt"
     min_size                        = 1
     max_size        = 4
     desired_capacity   = 1
     recurrence          = "0 17 * * *" 
 
-    autoscaling_group_name = module.webserver_cluster.asg_name
+    autoscaling_group_name = aws_autoscaling_group.asg_name.name
 }

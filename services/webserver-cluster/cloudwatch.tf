@@ -3,15 +3,15 @@ resource "aws_cloudwatch_metric_alarm" "high_cpu_utilization" {
     namespace        = "AWS/EC2"
     metric_name      = "CPUUtilization"
 
-    dimensions {
+    dimensions = {
         AutoScalingGroupName    = aws_autoscaling_group.asg_web.name
     } 
 
     comparison_operator         = "GreaterThanThreshold"
-    evalution_periods           = 1
+    evaluation_periods           = 1
     period                      = 300
     statistic                   = "Average"
-    thresold                    = 90
+    threshold                    = 90
     unit                        = "Percent"
 }
 
@@ -28,14 +28,14 @@ resource "aws_cloudwatch_metric_alarm" "low_cpu_credit_balance" {
     namespace   = "AWS/EC2"
     metric_name = "CPUCreditBalance"
 
-    dimensions {
+    dimensions = {
         AutoScalingGroupName    = aws_autoscaling_group.asg_web.name
     }
     
     comparison_operator         = "LessThanThreshold"
-    evalution_periods           = 1
+    evaluation_periods           = 1
     period                      = 300
     statistic                   = "Minimum"
-    thresold                    = 10
+    threshold                    = 10
     unit                        = "Count"
 }
